@@ -2,4 +2,10 @@
     <string name="app_name">ObservaPlanta</string>
     <string name="AddPlant">add plant to list</string>
     <string name="AppName">ObservaPlanta</string>
+    <string name="plante_nom_label">Nom de la plante</string>
+    <string name="plante_nom_hint">Entrer le nom de la plante</string>
+    <string name="plante_nomLatin_label">Nom latin de la plante</string>
+    <string name="plante_nomLatin_hint">Entrer le nom latin de la plante</string>
+    <string name="plante_supprimer_label">Supprimer</string>
+    <string name="plante_image_description">Image de la plante</string>
 </resources>
