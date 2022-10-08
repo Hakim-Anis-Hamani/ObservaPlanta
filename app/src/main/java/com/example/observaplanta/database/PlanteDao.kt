@@ -13,7 +13,7 @@ import com.example.observaplanta.plante.Plante
 @Dao
 interface PlanteDao {
     @Query("SELECT * FROM plante")
-    fun getPlantess(): Flow<List<Plante>>
+    fun getPlantes(): Flow<List<Plante>>
 
     @Query("SELECT * FROM plante WHERE id=(:id)")
     suspend fun getPlante(id: UUID): Plante

@@ -61,31 +61,33 @@
         android:hint="@string/plante_nomLatin_hint"
         android:inputType="text"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/spinner2"
+        app:layout_constraintBottom_toTopOf="@+id/spinner_ensoleillement"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
         app:layout_constraintVertical_bias="0.0" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/spinner_ensoleillement"
         android:layout_width="185dp"
-        android:layout_height="30dp"
+        android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="44dp"
         app:layout_constraintBottom_toTopOf="@+id/carte_supprimer"
-        app:layout_constraintEnd_toStartOf="@+id/spinner"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/spinner_arrosage"
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="Selectionneur ensoleillement"/>
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spinner_arrosage"
         android:layout_width="185dp"
-        android:layout_height="30dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="44dp"
         app:layout_constraintBottom_toTopOf="@+id/carte_supprimer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/spinner2" />
+        app:layout_constraintStart_toEndOf="@+id/spinner_ensoleillement"
+        android:contentDescription="Selectionneur arrosage"/>
 
     <Button
         android:id="@+id/carte_supprimer"
