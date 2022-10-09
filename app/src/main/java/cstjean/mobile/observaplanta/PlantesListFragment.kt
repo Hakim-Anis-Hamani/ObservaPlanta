@@ -10,6 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import cstjean.mobile.observaplanta.databinding.FragmentPlantesListBinding
 import cstjean.mobile.observaplanta.plante.PeriodeArossage
@@ -41,7 +42,7 @@ class PlantesListFragment : Fragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentPlantesListBinding.inflate(layoutInflater, container, false)
-        binding.plantesRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.plantesRecyclerView.layoutManager = GridLayoutManager(context,2)
         return binding.root
     }
 
