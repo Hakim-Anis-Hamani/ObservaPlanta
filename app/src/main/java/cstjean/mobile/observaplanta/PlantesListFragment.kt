@@ -11,8 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.github.javafaker.CreditCardType
-import com.github.javafaker.Faker
 import cstjean.mobile.observaplanta.databinding.FragmentPlantesListBinding
 import cstjean.mobile.observaplanta.plante.PeriodeArossage
 import cstjean.mobile.observaplanta.plante.Plante
@@ -68,6 +66,7 @@ class PlantesListFragment : Fragment(){
                 menuInflater.inflate(R.menu.fragment_plantes_list, menu)
             }
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+
                 return when (menuItem.itemId) {
                     R.id.nouvelle_carte -> {
                         viewLifecycleOwner.lifecycleScope.launch {
@@ -81,6 +80,9 @@ class PlantesListFragment : Fragment(){
                                 )
 
                             plantesListViewModel.addPlante(nouvellePlante)
+                            findNavController().navigate(
+                                PlantesListFragmentDirections.showPlanteDetail(nouvellePlante.id)
+                            )
                         }
                         true
                     }
