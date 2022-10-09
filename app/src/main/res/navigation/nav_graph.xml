@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph.xml">
-
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/plantesListFragment">
+    <fragment
+        android:id="@+id/plantesListFragment"
+        android:name="cstjean.mobile.observaplanta.PlantesListFragment"
+        android:label="PlantesListFragment"
+        tools:layout="@layout/fragment_plantes_list">
+        <action
+            android:id="@+id/show_plante_detail"
+            app:destination="@id/planteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/planteFragment"
+        android:name="cstjean.mobile.observaplanta.PlanteFragment"
+        android:label="PlanteFragment"
+        tools:layout="@layout/fragment_plante" >
+        <argument
+            android:name="planteId"
+            app:argType="java.util.UUID"/>
+        <action
+            android:id="@+id/supprimer_plante"
+            app:destination="@id/plantesListFragment" />
+    </fragment>
 </navigation>

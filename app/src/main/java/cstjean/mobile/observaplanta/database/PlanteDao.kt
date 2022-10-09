@@ -1,6 +1,5 @@
-package com.example.observaplanta.database
+package cstjean.mobile.observaplanta.database
 
-import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 import java.util.*
 import androidx.room.Dao
@@ -8,7 +7,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.example.observaplanta.plante.Plante
+import cstjean.mobile.observaplanta.plante.Plante
 
 @Dao
 interface PlanteDao {

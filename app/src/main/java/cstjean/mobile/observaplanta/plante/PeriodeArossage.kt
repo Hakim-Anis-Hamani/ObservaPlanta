@@ -1,4 +1,4 @@
-package com.example.observaplanta.plante
+package cstjean.mobile.observaplanta.plante
 
 enum class PeriodeArossage(val jours: String) {
     FREQUENT("2-3 jours"),

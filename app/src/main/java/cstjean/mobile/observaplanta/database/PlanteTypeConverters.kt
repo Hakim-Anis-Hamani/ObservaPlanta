@@ -1,7 +1,6 @@
-package com.example.observaplanta.database
+package cstjean.mobile.observaplanta.database
 
 import androidx.room.TypeConverter
-import com.example.observaplanta.plante.TypeEnsoleillement
 import java.util.*
 
 class PlanteTypeConverters {

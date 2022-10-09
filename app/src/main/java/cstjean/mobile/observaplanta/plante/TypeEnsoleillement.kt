@@ -1,4 +1,4 @@
-package com.example.observaplanta.plante
+package cstjean.mobile.observaplanta.plante
 
 enum class TypeEnsoleillement(val string: String){
     PLEIN_SOLEIL("Plein soleil"),

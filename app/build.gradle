@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.observaplanta'
+    namespace 'cstjean.mobile.observaplanta'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.observaplanta"
+        applicationId 'cstjean.mobile.observaplanta'
         minSdk 24
         targetSdk 33
         versionCode 1
@@ -30,22 +30,26 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
+        freeCompilerArgs += [
+                "-Xjvm-default=all",
+        ]
         jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
     }
 }
 
 dependencies {
-
     implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
-    implementation 'com.github.javafaker:javafaker:1.0.2'
-    implementation 'io.github.serpro69:kotlin-faker:1.8.0-rc.0'
-    implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'androidx.appcompat:appcompat:1.5.0'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.fragment:fragment-ktx:1.5.2'
+    implementation 'androidx.fragment:fragment-ktx:1.5.3'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.activity:activity-ktx:1.6.0'
     testImplementation 'junit:junit:4.13.2'
     implementation 'androidx.room:room-runtime:2.4.3'
     implementation 'androidx.room:room-ktx:2.4.3'

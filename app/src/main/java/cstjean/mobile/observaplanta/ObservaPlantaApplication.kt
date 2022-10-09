@@ -1,7 +1,6 @@
-package com.example.observaplanta
+package cstjean.mobile.observaplanta
 
 import android.app.Application
-import com.example.observaplanta.plante.Plante
 
 class ObservaPlantaApplication : Application(){
     override fun onCreate() {

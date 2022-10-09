@@ -8,4 +8,5 @@
     <string name="plante_nomLatin_hint">Entrer le nom latin de la plante</string>
     <string name="plante_supprimer_label">Supprimer</string>
     <string name="plante_image_description">Image de la plante</string>
+    <string name="plante_ajouter">Ajouter_plante</string>
 </resources>

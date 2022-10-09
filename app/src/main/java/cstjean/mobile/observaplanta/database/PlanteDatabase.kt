@@ -1,7 +1,7 @@
-package com.example.observaplanta.database
+package cstjean.mobile.observaplanta.database
 
 import androidx.room.*
-import com.example.observaplanta.plante.Plante
+import cstjean.mobile.observaplanta.plante.Plante
 
 @Database(entities = [ Plante::class ], version=1, exportSchema = false)
 @TypeConverters(PlanteTypeConverters::class)

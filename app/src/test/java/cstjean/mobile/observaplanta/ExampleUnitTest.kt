@@ -1,4 +1,4 @@
-package com.example.observaplanta
+package cstjean.mobile.observaplanta
 
 import org.junit.Test
 
