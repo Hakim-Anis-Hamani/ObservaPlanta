@@ -1,8 +1,13 @@
 package cstjean.mobile.observaplanta
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,7 +20,7 @@ import cstjean.mobile.observaplanta.databinding.FragmentPlanteBinding
 import cstjean.mobile.observaplanta.plante.Plante
 import kotlinx.coroutines.launch
 
-class PlanteFragment : Fragment(){
+class PlanteFragment : Fragment() {
     private var _binding: FragmentPlanteBinding? = null
     private val binding
         get() = checkNotNull(_binding) {
@@ -26,6 +31,7 @@ class PlanteFragment : Fragment(){
     private val planteViewModel: PlanteViewModel by viewModels {
         PlanteViewModelFactory(args.planteId)
     }
+
     /**
      * Instanciation de l'interface.
      *
@@ -66,6 +72,41 @@ class PlanteFragment : Fragment(){
                 }
             }
 
+            ArrayAdapter.createFromResource(
+                spinnerEnsoleillement.context,
+                R.array.type_ensoleillement,
+                android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinnerEnsoleillement.adapter = adapter
+            }
+
+            ArrayAdapter.createFromResource(
+                spinnerArrosage.context,
+                R.array.periode_arrosage,
+                android.R.layout.simple_spinner_item
+            ).also { adapter ->
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinnerArrosage.adapter = adapter
+            }
+
+            spinnerEnsoleillement.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        val selectedValue = parent?.getItemAtPosition(position)
+                        
+                    }
+
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                    }
+                }
+
             viewLifecycleOwner.lifecycleScope.launch {
                 viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                     planteViewModel.plante.collect { plante ->
@@ -80,15 +121,15 @@ class PlanteFragment : Fragment(){
     private suspend fun updateUi(plante: Plante) {
         binding.apply {
 
-            if (planteNom.text.toString() != plante.nom ) {
+            if (planteNom.text.toString() != plante.nom) {
                 planteNom.setText(plante.nom)
             }
 
-            if (planteNomLatin.text.toString() != plante.nomLatin ) {
+            if (planteNomLatin.text.toString() != plante.nomLatin) {
                 planteNomLatin.setText(plante.nomLatin)
             }
 
-            carteSupprimer.setOnClickListener{
+            carteSupprimer.setOnClickListener {
                 findNavController().navigate(
                     PlanteFragmentDirections.supprimerPlante()
                 )
@@ -99,6 +140,7 @@ class PlanteFragment : Fragment(){
 
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

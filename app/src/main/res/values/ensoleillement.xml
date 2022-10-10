@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="type_ensoleillement">
+        <item>Plein soleil</item>
+        <item>Soleil partiel</item>
+        <item>Ombre complète</item>
+    </string-array>
+</resources>

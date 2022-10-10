@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="periode_arrosage">
+        <item>2–3 jours</item>
+        <item>5–7 jours</item>
+        <item>7–10 jours</item>
+        <item>10–14 jours</item>
+    </string-array>
+</resources>
