@@ -8,8 +8,9 @@ import java.util.*
 data class Plante(@PrimaryKey val id: UUID,
                   val nom: String,
                   val nomLatin: String,
-                  val ensoleillement : TypeEnsoleillement,
-                  val periodeArrosage: PeriodeArossage
+                  val ensoleillement : String,
+                  val periodeArrosage: String,
+                  val photoFilename: String? = null
 ){
     //TODO placer image de la plante avec une image de base
 }

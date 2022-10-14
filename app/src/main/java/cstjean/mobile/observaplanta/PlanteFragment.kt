@@ -1,13 +1,19 @@
 package cstjean.mobile.observaplanta
 
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
+import androidx.core.view.doOnLayout
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,6 +25,9 @@ import androidx.navigation.fragment.navArgs
 import cstjean.mobile.observaplanta.databinding.FragmentPlanteBinding
 import cstjean.mobile.observaplanta.plante.Plante
 import kotlinx.coroutines.launch
+import java.io.File
+import java.util.*
+
 
 class PlanteFragment : Fragment() {
     private var _binding: FragmentPlanteBinding? = null
@@ -31,6 +40,9 @@ class PlanteFragment : Fragment() {
     private val planteViewModel: PlanteViewModel by viewModels {
         PlanteViewModelFactory(args.planteId)
     }
+
+    private var selection: String = ""
+    private var selPosition = 0
 
     /**
      * Instanciation de l'interface.
@@ -98,8 +110,42 @@ class PlanteFragment : Fragment() {
                         position: Int,
                         id: Long
                     ) {
-                        val selectedValue = parent?.getItemAtPosition(position)
-                        
+                        selection = parent?.getItemAtPosition(position).toString()
+
+                        selPosition = position
+
+                        Log.i("TAG-update", "Soleil " + selPosition.toString())
+
+
+                        planteViewModel.updateCarte { oldPlante ->
+                            oldPlante.copy(
+                                ensoleillement = selection
+                            )
+                        }
+
+                    }
+
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                    }
+                }
+
+            spinnerArrosage.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        selection = parent?.getItemAtPosition(position).toString()
+
+                        planteViewModel.updateCarte { oldPlante ->
+                            oldPlante.copy(
+                                periodeArrosage = selection
+                            )
+                        }
+
                     }
 
                     override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -115,6 +161,23 @@ class PlanteFragment : Fragment() {
                 }
             }
 
+            planteCamera.setOnClickListener {
+                photoFilename = "IMG_${Date()}.JPG"
+                val photoFichier = File(requireContext().applicationContext.filesDir, photoFilename)
+                val photoUri = FileProvider.getUriForFile(
+                    requireContext(),
+                    "cstjean.mobile.fileprovider",
+                    photoFichier
+                )
+                prendrePhoto.launch(photoUri)
+            }
+
+            val cameraIntent = prendrePhoto.contract.createIntent(
+                requireContext(),
+                Uri.parse("")
+            )
+
+            planteCamera.isEnabled = canResolveIntent(cameraIntent)
         }
     }
 
@@ -138,7 +201,60 @@ class PlanteFragment : Fragment() {
                 }
             }
 
+            btnPartager.setOnClickListener {
+                val intent = Intent(Intent.ACTION_SEND).apply {
+                    type = "image/*"
+                    putExtra(Intent.EXTRA_TEXT, plante.nom)
+                }
+
+                val chooserIntent = Intent.createChooser(
+                    intent,
+                    getString(R.string.partager)
+                )
+
+                startActivity(chooserIntent)
+            }
+
+            updatePhoto(plante.photoFilename)
         }
+    }
+
+    private val prendrePhoto =
+        registerForActivityResult(ActivityResultContracts.TakePicture()) { photoPrise: Boolean ->
+            if (photoPrise && photoFilename != null) {
+                planteViewModel.updateCarte { oldPlante ->
+                    oldPlante.copy(photoFilename = photoFilename)
+                }
+            }
+        }
+
+    private var photoFilename: String? = null
+
+    private fun updatePhoto(photoFilename: String?) {
+        if (binding.planteCamera.tag != photoFilename) {
+            val photoFichier = photoFilename?.let {
+                File(requireContext().applicationContext.filesDir, it)
+            }
+            if (photoFichier?.exists() == true) {
+                binding.planteCamera.doOnLayout { view ->
+                    val scaledBitmap = getScaledBitmap(
+                        photoFichier.path,
+                        view.width,
+                        view.height
+                    )
+                    binding.planteCamera.setImageBitmap(scaledBitmap)
+                    binding.planteCamera.tag = photoFilename
+                }
+            } else {
+                binding.planteCamera.setImageBitmap(null)
+                binding.planteCamera.tag = null
+            }
+        }
+    }
+
+    private fun canResolveIntent(intent: Intent): Boolean {
+        val packageManager: PackageManager = requireActivity().packageManager
+        return intent.resolveActivity(packageManager) != null
     }
 
     override fun onDestroyView() {

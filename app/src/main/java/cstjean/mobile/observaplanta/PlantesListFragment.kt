@@ -76,8 +76,8 @@ class PlantesListFragment : Fragment(){
                                     UUID.randomUUID(),
                                 "",
                                 "",
-                                TypeEnsoleillement.PLEIN_SOLEIL,
-                                PeriodeArossage.HEBDOMADAIRE
+                                "",
+                                ""
                                 )
 
                             plantesListViewModel.addPlante(nouvellePlante)

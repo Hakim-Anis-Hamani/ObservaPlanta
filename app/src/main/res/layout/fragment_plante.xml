@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -60,47 +61,61 @@
         android:hint="@string/plante_nomLatin_hint"
         android:inputType="text"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/spinner_ensoleillement"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_NomLatin"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_NomLatin" />
 
     <Spinner
         android:id="@+id/spinner_ensoleillement"
         android:layout_width="185dp"
         android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="44dp"
-        app:layout_constraintBottom_toTopOf="@+id/carte_supprimer"
-        app:layout_constraintEnd_toStartOf="@+id/spinner_arrosage"
-        app:layout_constraintStart_toStartOf="parent"
-        android:contentDescription="Selectionneur ensoleillement"/>
+        android:contentDescription="@string/selectionneur_ensoleillement"
+        app:layout_constraintStart_toStartOf="@+id/plante_nomLatin"
+        app:layout_constraintTop_toBottomOf="@+id/plante_nomLatin" />
 
     <Spinner
         android:id="@+id/spinner_arrosage"
         android:layout_width="185dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="44dp"
-        app:layout_constraintBottom_toTopOf="@+id/carte_supprimer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/spinner_ensoleillement"
-        android:contentDescription="Selectionneur arrosage"/>
+        android:contentDescription="@string/selectionneur_arrosage"
+        app:layout_constraintEnd_toEndOf="@+id/plante_nomLatin"
+        app:layout_constraintTop_toBottomOf="@+id/plante_nomLatin" />
 
     <Button
         android:id="@+id/carte_supprimer"
-        android:layout_width="match_parent"
+        android:layout_width="185dp"
         android:layout_height="wrap_content"
         android:text="@string/plante_supprimer_label"
-        app:layout_constraintBottom_toTopOf="@+id/imagePlante" />
+        app:layout_constraintEnd_toEndOf="@+id/spinner_arrosage"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_arrosage" />
 
     <ImageView
         android:id="@+id/imagePlante"
-        android:layout_width="match_parent"
-        android:layout_height="366dp"
+        android:layout_width="230dp"
+        android:layout_height="165dp"
         android:contentDescription="@string/plante_image_description"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/carte_supprimer" />
+
+    <Button
+        android:id="@+id/btn_partager"
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"
+        android:text="@string/partager"
+        app:layout_constraintStart_toStartOf="@+id/spinner_ensoleillement"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_ensoleillement" />
+
+    <ImageButton
+        android:id="@+id/plante_camera"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        app:layout_constraintEnd_toEndOf="@+id/imagePlante"
+        app:layout_constraintStart_toStartOf="@+id/imagePlante"
+        app:layout_constraintTop_toBottomOf="@+id/imagePlante"
+        app:srcCompat="@drawable/ic_baseline_photo_camera"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

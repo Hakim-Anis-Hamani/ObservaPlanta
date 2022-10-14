@@ -2,6 +2,7 @@ package cstjean.mobile.observaplanta
 
 import android.content.Context
 import androidx.room.Room
+import cstjean.mobile.observaplanta.database.MIGRATION_1_2
 import cstjean.mobile.observaplanta.database.PlanteDatabase
 import cstjean.mobile.observaplanta.plante.Plante
 import kotlinx.coroutines.CoroutineScope
@@ -20,6 +21,7 @@ class PlanteRepository private constructor(context: Context, private val corouti
             PlanteDatabase::class.java,
             DATABASE_NAME
         )
+        .addMigrations(MIGRATION_1_2)
         .build()
 
     fun getPlantes(): Flow<List<Plante>> = database.planteDao().getPlantes()

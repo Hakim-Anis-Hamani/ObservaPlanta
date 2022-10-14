@@ -9,4 +9,7 @@
     <string name="plante_supprimer_label">Supprimer</string>
     <string name="plante_image_description">Image de la plante</string>
     <string name="plante_ajouter">Ajouter_plante</string>
+    <string name="selectionneur_ensoleillement">Selectionneur ensoleillement</string>
+    <string name="selectionneur_arrosage">Selectionneur arrosage</string>
+    <string name="partager">Partager</string>
 </resources>
