@@ -10,7 +10,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.util.*
-
+/**
+ * ViewModel pour une plante.
+ *
+ * @author Hakim-Anis Hamani
+ */
 class PlanteViewModel(planteId: UUID): ViewModel() {
     private val planteRepository = PlanteRepository.get()
     private val _plante: MutableStateFlow<Plante?> = MutableStateFlow(null)

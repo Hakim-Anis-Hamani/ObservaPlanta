@@ -6,19 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/light_green">
+    android:background="?colorPrimaryVariant">
 
-
-    <Button
-        android:id="@+id/plante_ajouter"
-        android:layout_width="159dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="24dp"
-        android:text="Ajouter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/plante_supprimer"
-        app:layout_constraintStart_toEndOf="@+id/imagePlante" />
 
     <ImageButton
         android:id="@+id/plante_camera"
@@ -27,10 +16,11 @@
         android:layout_marginStart="56dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagePlante"
+        app:layout_constraintTop_toBottomOf="@+id/image_plante"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_baseline_photo_camera"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck"
+        android:contentDescription="@string/button_camera" />
 
     <EditText
         android:id="@+id/plante_nom"
@@ -69,10 +59,9 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="24dp"
-        android:contentDescription="Selectionneur ensoleillement"
-        app:layout_constraintBottom_toTopOf="@+id/plante_ajouter"
+        android:contentDescription="@string/selectionneur_ensoleillement"
         app:layout_constraintEnd_toStartOf="@+id/spinner_arrosage"
-        app:layout_constraintStart_toEndOf="@+id/imagePlante"
+        app:layout_constraintStart_toEndOf="@+id/image_plante"
         app:layout_constraintTop_toBottomOf="@+id/plante_nomLatin" />
 
     <Spinner
@@ -82,7 +71,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
-        android:contentDescription="Selectionneur arrosage"
+        android:contentDescription="@string/selectionneur_arrosage"
         app:layout_constraintBottom_toTopOf="@+id/plante_supprimer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/plante_nomLatin" />

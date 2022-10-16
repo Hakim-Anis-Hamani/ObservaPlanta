@@ -8,7 +8,11 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import cstjean.mobile.observaplanta.plante.Plante
-
+/**
+ * Interface Dao pour la gestion des commandes de la base de données.
+ *
+ * @author Hakim-Anis Hamani
+ */
 @Dao
 interface PlanteDao {
     @Query("SELECT * FROM plante")

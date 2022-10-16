@@ -4,6 +4,11 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import kotlin.math.roundToInt
 
+/**
+ * Classe permettant la gestion d'image de la photo
+ *
+ * @author Olivier Bilodeau
+ */
 fun getScaledBitmap(path: String, destWidth: Int, destHeight: Int): Bitmap {
     val options = BitmapFactory.Options()
     options.inJustDecodeBounds = true

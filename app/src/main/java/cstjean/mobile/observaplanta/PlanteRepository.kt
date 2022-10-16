@@ -13,7 +13,11 @@ import java.lang.IllegalStateException
 import java.util.*
 
 private const val DATABASE_NAME = "plante-database"
-
+/**
+ * Classe repository s'occupant de l'initialisation de la base de données et des appel Dao
+ *
+ * @author Hakim-Anis Hamani
+ */
 class PlanteRepository private constructor(context: Context, private val coroutineScope: CoroutineScope = GlobalScope) {
     private val database: PlanteDatabase = Room
         .databaseBuilder(

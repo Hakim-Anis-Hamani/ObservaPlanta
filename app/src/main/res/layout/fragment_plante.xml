@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/light_green">
+    android:background="?colorPrimaryVariant">
 
     <TextView
         android:id="@+id/textViewNomPlante"
@@ -116,19 +116,9 @@
         app:layout_constraintStart_toStartOf="@+id/image_plante"
         app:layout_constraintTop_toBottomOf="@+id/image_plante"
         app:srcCompat="@drawable/ic_baseline_photo_camera"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck"
+        android:contentDescription="@string/button_camera" />
 
-    <Button
-        android:id="@+id/plante_ajouter"
-        android:layout_width="159dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="32dp"
-        android:text="Ajouter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/plante_camera"
-        app:layout_constraintVertical_bias="0.734" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,16 +14,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import cstjean.mobile.observaplanta.databinding.FragmentPlantesListBinding
-import cstjean.mobile.observaplanta.plante.PeriodeArossage
 import cstjean.mobile.observaplanta.plante.Plante
-import cstjean.mobile.observaplanta.plante.TypeEnsoleillement
 import kotlinx.coroutines.launch
 import java.util.*
 
-private const val TAG = "PlantesListFragment"
-
+/**
+ * Fragment pour la liste des plantes.
+ *
+ * @author Hakim-Anis Hamani
+ */
 class PlantesListFragment : Fragment(){
     private var _binding: FragmentPlantesListBinding? = null
     private val binding
@@ -56,6 +56,15 @@ class PlantesListFragment : Fragment(){
         return binding.root
     }
 
+    /**
+     * Instanciation de l'interface.
+     *
+     * @param inflater Pour instancier l'interface.
+     * @param container Le parent qui contiendra notre interface.
+     * @param savedInstanceState Les données conservées au changement d'état.
+     *
+     * @return La vue instanciée.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -70,6 +79,8 @@ class PlantesListFragment : Fragment(){
                 }
             }
         }
+
+        /**Variable text watcher permettant de capter les modification dans la barre de recherche à tout moment*/
         val textwatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 //...
@@ -90,12 +101,27 @@ class PlantesListFragment : Fragment(){
             }
 
         }
-        binding.plantesSearchBar.addTextChangedListener(textwatcher);
+        binding.plantesSearchBar.addTextChangedListener(textwatcher)
+
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(object : MenuProvider {
+
+            /**
+             * Instanciation du menu
+             *
+             * @param menu menu de l'interface.
+             * @param menuInflater classe de l'initialisation du xml afin d'instancer l'interface
+             */
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.fragment_plantes_list, menu)
             }
+
+            /**
+             * Lorsque un item du menu est utiliser
+             *
+             * @param menu menu de l'interface.
+             * @param menuInflater classe de l'initialisation du xml afin d'instancer l'interface.
+             */
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
 
                 return when (menuItem.itemId) {

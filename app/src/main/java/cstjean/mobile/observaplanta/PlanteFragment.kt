@@ -1,14 +1,11 @@
 package cstjean.mobile.observaplanta
-
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.activity.result.contract.ActivityResultContracts
@@ -28,7 +25,11 @@ import kotlinx.coroutines.launch
 import java.io.File
 import java.util.*
 
-
+/**
+ * Fragment pour la gestion d'une plante.
+ *
+ * @author  Olivier Bilodeau et Hakim-Anis Hamani
+ */
 class PlanteFragment : Fragment() {
     private var _binding: FragmentPlanteBinding? = null
     private val binding
@@ -81,6 +82,7 @@ class PlanteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         binding.apply {
             planteNom.doOnTextChanged { text, _, _, _ ->
                 planteViewModel.updateCarte { oldPlante ->
@@ -124,7 +126,7 @@ class PlanteFragment : Fragment() {
 
                         selPosition = position
 
-                        Log.i("TAG-update", "Soleil " + selPosition.toString())
+                        Log.i("TAG-update", "Soleil $selPosition")
 
                         planteViewModel.updateCarte { oldPlante ->
                             oldPlante.copy(
@@ -183,10 +185,17 @@ class PlanteFragment : Fragment() {
             )
 
             planteCamera.isEnabled = canResolveIntent(cameraIntent)
+
         }
     }
 
+    /**
+     * Fonction permettant l'update des champs de la plante.
+     *
+     * @param plante La plante modifié.
+     */
     private suspend fun updateUi(plante: Plante) {
+
         binding.apply {
 
             if (planteNom.text.toString() != plante.nom) {
@@ -224,6 +233,7 @@ class PlanteFragment : Fragment() {
                 val alert = builder.create()
                 alert.show()
             }
+
 
             btnPartager.setOnClickListener {
                 val intent = Intent(Intent.ACTION_SEND).apply {

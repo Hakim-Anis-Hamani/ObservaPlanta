@@ -1,7 +1,5 @@
 package cstjean.mobile.observaplanta
 
-import android.annotation.SuppressLint
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,11 +8,11 @@ import cstjean.mobile.observaplanta.plante.Plante
 import java.util.*
 
 /**
- * ViewHolder pour Le RecyclerView des Cartes.
+ * ViewHolder pour Le RecyclerView des Plantes.
  *
  * @property binding Binding de la vue pour une cellule.
  *
- * @author Olga Cazacioc et Hakim-Anis Hamani
+ * @author Hakim-Anis Hamani
  */
 class PlanteHolder(private val binding: ListItemPlanteBinding) :
     RecyclerView.ViewHolder(binding.root) {
@@ -22,7 +20,7 @@ class PlanteHolder(private val binding: ListItemPlanteBinding) :
     /**
      * On associe une carte à ce ViewHolder.
      *
-     * @param carte La carte associé.
+     * @param plante La plante associé.
      */
     fun bind(plante: Plante, onPlanteClicked: (planteId: UUID) -> Unit) {
         binding.planteNom.text = plante.nom
@@ -38,9 +36,9 @@ class PlanteHolder(private val binding: ListItemPlanteBinding) :
 }
 
 /**
- * Adapter pour notre RecyclerView de Cartes.
+ * Adapter pour notre RecyclerView de Plantes.
  *
- * @property cartes Liste des cartes à afficher.
+ * @property plantes Liste des plantes à afficher.
  *
  * @author Gabriel T. St-Hilaire
  */

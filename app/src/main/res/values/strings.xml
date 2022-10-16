@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">ObservaPlanta</string>
-    <string name="AddPlant">add plant to list</string>
-    <string name="AppName">ObservaPlanta</string>
     <string name="plante_nom_label">Nom de la plante</string>
     <string name="plante_nom_hint">Entrer le nom de la plante</string>
     <string name="plante_nomLatin_label">Nom latin de la plante</string>
@@ -12,4 +10,6 @@
     <string name="selectionneur_ensoleillement">Selectionneur ensoleillement</string>
     <string name="selectionneur_arrosage">Selectionneur arrosage</string>
     <string name="partager">Partager</string>
+    <string name="search_bar">Barre de recherche</string>
+    <string name="button_camera">Button Camera</string>
 </resources>

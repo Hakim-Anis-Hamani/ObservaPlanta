@@ -5,6 +5,11 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import cstjean.mobile.observaplanta.plante.Plante
 
+/**
+ * Emplacement de la création de la base de données
+ *
+ * @author Olivier Bilodeau et Hakim-Anis Hamani
+ */
 @Database(entities = [ Plante::class ], version=2, exportSchema = false)
 @TypeConverters(PlanteTypeConverters::class)
 abstract class PlanteDatabase : RoomDatabase(){

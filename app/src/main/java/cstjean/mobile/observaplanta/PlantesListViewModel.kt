@@ -7,7 +7,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-
+/**
+ * ViewModel pour la liste des plantes.
+ *
+ * @author Hakim-Anis Hamani
+ */
 class PlantesListViewModel : ViewModel(){
     private val planteRepository = PlanteRepository.get()
     private val _plantes: MutableStateFlow<List<Plante>> = MutableStateFlow(emptyList())
@@ -20,6 +24,7 @@ class PlantesListViewModel : ViewModel(){
             }
         }
     }
+
     suspend fun addPlante(plante: Plante) {
         planteRepository.addPlante(plante)
     }
