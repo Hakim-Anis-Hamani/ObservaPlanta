@@ -1,8 +1,8 @@
 package cstjean.mobile.observaplanta
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -40,6 +40,16 @@ class PlanteFragment : Fragment() {
     private val planteViewModel: PlanteViewModel by viewModels {
         PlanteViewModelFactory(args.planteId)
     }
+
+    private val prendrePhoto =
+        registerForActivityResult(ActivityResultContracts.TakePicture()) { photoPrise: Boolean ->
+            if (photoPrise && photoFilename != null) {
+                planteViewModel.updateCarte { oldPlante ->
+                    oldPlante.copy(photoFilename = photoFilename)
+                }
+            }
+        }
+    private var photoFilename: String? = null
 
     private var selection: String = ""
     private var selPosition = 0
@@ -116,15 +126,12 @@ class PlanteFragment : Fragment() {
 
                         Log.i("TAG-update", "Soleil " + selPosition.toString())
 
-
                         planteViewModel.updateCarte { oldPlante ->
                             oldPlante.copy(
                                 ensoleillement = selection
                             )
                         }
-
                     }
-
                     override fun onNothingSelected(parent: AdapterView<*>?) {
 
                     }
@@ -145,9 +152,7 @@ class PlanteFragment : Fragment() {
                                 periodeArrosage = selection
                             )
                         }
-
                     }
-
                     override fun onNothingSelected(parent: AdapterView<*>?) {
 
                     }
@@ -192,13 +197,32 @@ class PlanteFragment : Fragment() {
                 planteNomLatin.setText(plante.nomLatin)
             }
 
-            carteSupprimer.setOnClickListener {
+            val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+
+            builder.setTitle("Confirm")
+            builder.setMessage("Are you sure?")
+
+            builder.setPositiveButton(
+                "YES"
+            ) { dialog, _ ->
                 findNavController().navigate(
                     PlanteFragmentDirections.supprimerPlante()
                 )
                 viewLifecycleOwner.lifecycleScope.launch {
                     plantesListViewModel.removePlante(plante)
                 }
+                dialog.dismiss()
+            }
+
+            builder.setNegativeButton(
+                "NO"
+            ) { dialog, _ ->
+                dialog.dismiss()
+            }
+
+            carteSupprimer.setOnClickListener {
+                val alert = builder.create()
+                alert.show()
             }
 
             btnPartager.setOnClickListener {
@@ -214,40 +238,29 @@ class PlanteFragment : Fragment() {
 
                 startActivity(chooserIntent)
             }
-
+            imagePlante.setImageResource(R.drawable.default_plant)
             updatePhoto(plante.photoFilename)
         }
     }
 
-    private val prendrePhoto =
-        registerForActivityResult(ActivityResultContracts.TakePicture()) { photoPrise: Boolean ->
-            if (photoPrise && photoFilename != null) {
-                planteViewModel.updateCarte { oldPlante ->
-                    oldPlante.copy(photoFilename = photoFilename)
-                }
-            }
-        }
-
-    private var photoFilename: String? = null
-
     private fun updatePhoto(photoFilename: String?) {
-        if (binding.planteCamera.tag != photoFilename) {
+        if (binding.imagePlante.tag != photoFilename) {
             val photoFichier = photoFilename?.let {
                 File(requireContext().applicationContext.filesDir, it)
             }
             if (photoFichier?.exists() == true) {
-                binding.planteCamera.doOnLayout { view ->
+                binding.imagePlante.doOnLayout { view ->
                     val scaledBitmap = getScaledBitmap(
                         photoFichier.path,
                         view.width,
                         view.height
                     )
-                    binding.planteCamera.setImageBitmap(scaledBitmap)
-                    binding.planteCamera.tag = photoFilename
+                    binding.imagePlante.setImageBitmap(scaledBitmap)
+                    binding.imagePlante.tag = photoFilename
                 }
             } else {
-                binding.planteCamera.setImageBitmap(null)
-                binding.planteCamera.tag = null
+                binding.imagePlante.setImageBitmap(null)
+                binding.imagePlante.tag = null
             }
         }
     }
