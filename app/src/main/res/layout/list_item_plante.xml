@@ -26,7 +26,7 @@
             android:background="@color/gray">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/image_plante"
                 android:layout_width="164dp"
                 android:layout_height="164dp"
                 android:layout_row="0"
