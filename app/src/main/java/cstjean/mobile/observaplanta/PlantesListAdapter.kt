@@ -27,6 +27,9 @@ class PlanteHolder(private val binding: ListItemPlanteBinding) :
     fun bind(plante: Plante, onPlanteClicked: (planteId: UUID) -> Unit) {
         binding.planteNom.text = plante.nom
         binding.planteNomLatin.text = plante.nom
+        if (binding.imagePlante.drawable == null) {
+            binding.imagePlante.setImageResource(R.drawable.default_plant)
+        }
         binding.root.setOnClickListener {
             onPlanteClicked(plante.id)
         }
