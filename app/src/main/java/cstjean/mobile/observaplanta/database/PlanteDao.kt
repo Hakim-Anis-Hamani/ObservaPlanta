@@ -25,4 +25,7 @@ interface PlanteDao {
 
     @Update
     suspend fun updatePlante(plante: Plante)
+
+    @Query("SELECT * FROM plante WHERE nom LIKE :nomPlante")
+    fun getPlantesParNom(nomPlante:String) : Flow<List<Plante>>
 }

@@ -27,4 +27,19 @@ class PlantesListViewModel : ViewModel(){
     suspend fun removePlante(plante: Plante) {
         planteRepository.removePlante(plante)
     }
+    fun getPlantesParNom(nomPlante: String) {
+        viewModelScope.launch {
+            planteRepository.getPlantesParNom(nomPlante).collect {
+                _plantes.value = it
+            }
+        }
+    }
+
+    fun getPlantes() {
+        viewModelScope.launch {
+            planteRepository.getPlantes().collect {
+                _plantes.value = it
+            }
+        }
+    }
 }

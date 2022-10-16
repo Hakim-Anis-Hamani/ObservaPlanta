@@ -1,6 +1,9 @@
 package cstjean.mobile.observaplanta
 
+import android.content.res.Configuration
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.*
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -42,7 +45,14 @@ class PlantesListFragment : Fragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentPlantesListBinding.inflate(layoutInflater, container, false)
-        binding.plantesRecyclerView.layoutManager = GridLayoutManager(context,2)
+        val orientation = this.resources.configuration.orientation
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            binding.plantesRecyclerView.layoutManager = GridLayoutManager(context,3)
+        }
+        else{
+            binding.plantesRecyclerView.layoutManager = GridLayoutManager(context,2)
+        }
+
         return binding.root
     }
 
@@ -60,7 +70,27 @@ class PlantesListFragment : Fragment(){
                 }
             }
         }
+        val textwatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                //...
+            }
 
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                //...
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                val nomPlante = s.toString()
+                if (nomPlante != "" ){
+                    plantesListViewModel.getPlantesParNom("%$nomPlante%")
+                }
+                else{
+                    plantesListViewModel.getPlantes()
+                }
+            }
+
+        }
+        binding.plantesSearchBar.addTextChangedListener(textwatcher);
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {

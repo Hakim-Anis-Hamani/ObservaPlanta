@@ -220,7 +220,7 @@ class PlanteFragment : Fragment() {
                 dialog.dismiss()
             }
 
-            carteSupprimer.setOnClickListener {
+            planteSupprimer.setOnClickListener {
                 val alert = builder.create()
                 alert.show()
             }

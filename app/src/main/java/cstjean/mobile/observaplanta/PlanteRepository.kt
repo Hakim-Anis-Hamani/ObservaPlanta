@@ -40,6 +40,7 @@ class PlanteRepository private constructor(context: Context, private val corouti
             database.planteDao().updatePlante(plante)
         }
     }
+    fun getPlantesParNom(nomPlante:String): Flow<List<Plante>> = database.planteDao().getPlantesParNom(nomPlante)
     companion object {
         private var INSTANCE: PlanteRepository? = null
         fun initialize(context: Context) {
