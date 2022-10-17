@@ -26,11 +26,15 @@ class PlanteViewModel(planteId: UUID): ViewModel() {
         }
     }
 
+    /**
+     * Fonction qui update les informations d'une carte dans la liste.
+     */
     fun updateCarte(onUpdate: (Plante) -> Plante) {
         _plante.update { oldPlante ->
             oldPlante?.let { onUpdate(it) }
         }
     }
+
     override fun onCleared() {
         super.onCleared()
         plante.value?.let { planteRepository.updatePlante(it) }

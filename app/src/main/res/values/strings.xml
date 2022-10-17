@@ -12,4 +12,6 @@
     <string name="partager">Partager</string>
     <string name="search_bar">Barre de recherche</string>
     <string name="button_camera">Button Camera</string>
+    <string name="confirmation">Confirmer la suppression</string>
+    <string name="confirm_question">Êtes-vous sur de supprimer cette plante</string>
 </resources>

@@ -12,7 +12,7 @@ import java.util.*
  *
  * @property binding Binding de la vue pour une cellule.
  *
- * @author Hakim-Anis Hamani
+ * @author Hakim-Anis Hamani et Olivier Bilodeau
  */
 class PlanteHolder(private val binding: ListItemPlanteBinding) :
     RecyclerView.ViewHolder(binding.root) {

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -126,8 +125,6 @@ class PlanteFragment : Fragment() {
 
                         selPosition = position
 
-                        Log.i("TAG-update", "Soleil $selPosition")
-
                         planteViewModel.updateCarte { oldPlante ->
                             oldPlante.copy(
                                 ensoleillement = selection
@@ -208,8 +205,8 @@ class PlanteFragment : Fragment() {
 
             val builder: AlertDialog.Builder = AlertDialog.Builder(context)
 
-            builder.setTitle("Confirm")
-            builder.setMessage("Are you sure?")
+            builder.setTitle(getString(R.string.confirmation))
+            builder.setMessage(getString(R.string.confirm_question))
 
             builder.setPositiveButton(
                 "YES"
@@ -253,6 +250,9 @@ class PlanteFragment : Fragment() {
         }
     }
 
+    /**
+     * Fonction permettant l'update du preview de la photo.
+     */
     private fun updatePhoto(photoFilename: String?) {
         if (binding.imagePlante.tag != photoFilename) {
             val photoFichier = photoFilename?.let {
@@ -275,11 +275,17 @@ class PlanteFragment : Fragment() {
         }
     }
 
+    /**
+     * Fonction pour valider l'utilisation et la réalisation de l'intent.
+     */
     private fun canResolveIntent(intent: Intent): Boolean {
         val packageManager: PackageManager = requireActivity().packageManager
         return intent.resolveActivity(packageManager) != null
     }
 
+    /**
+     * Lorsque la vue est détruite.
+     */
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
